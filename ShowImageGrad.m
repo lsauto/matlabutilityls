@@ -3,15 +3,15 @@
 % 
 % Authors: Sun Li
 % Date:    22/03/2013
-% Last modified: 06/05/2013
+% Last modified: 10/07/2014
 % -------------------------------------------------------------------
 
-function ShowImageGrad(img, para1, gra, para2)
+function h = ShowImageGrad(img, para1, gra, para2)
 
     if exist('para1', 'var') && isfield(para1, 'fig'),
-        figure('NumberTitle', 'off', 'Name', para1.fig);
+        h = figure('NumberTitle', 'off', 'Name', para1.fig);
     else
-        figure;
+        h = figure;
     end
 
     if max(img(:)) > 1+eps,
@@ -71,6 +71,5 @@ function ShowImageGrad(img, para1, gra, para2)
     h=quiver(XX,YY,u,v, lar);
     set(h,'color',col);
     hold off
-    
     
 end
