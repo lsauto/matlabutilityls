@@ -66,7 +66,7 @@ function ShowEnlargePatch(imgRec, point1, point2, lr, offset, mag, lineStyle, co
     end
      
     % ---------------- Show ------------------
-    ShowImageGrad(imgRec);
+    h = ShowImageGrad(imgRec);
     for ii =1:size(point1, 1),
         ww = point2(ii, 1)-point1(ii, 1)+1;
         hh = point2(ii, 2)-point1(ii, 2)+1;
@@ -76,17 +76,17 @@ function ShowEnlargePatch(imgRec, point1, point2, lr, offset, mag, lineStyle, co
 
         switch lr(ii),
             case 1,% The left-upper
-                ShowAddBox(point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox(offset(ii, :), offset(ii, :)+[size(patch,2), size(patch,1)], lineStyle, color);
+                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(h, offset(ii, :), offset(ii, :)+[size(patch,2), size(patch,1)], lineStyle, color);
             case 2,% The right-upper
-                ShowAddBox(point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox([w-offset(ii, 1)-wp+1, offset(ii, 2)], [w-offset(ii, 1), offset(ii, 2)+hp-1], lineStyle, color);
+                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(h, [w-offset(ii, 1)-wp+1, offset(ii, 2)], [w-offset(ii, 1), offset(ii, 2)+hp-1], lineStyle, color);
             case 3,% The left-down
-                ShowAddBox(point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox([offset(ii, 1), h-offset(ii, 2)-hp+1], [offset(ii, 1)+wp-1, h-offset(ii, 2)], lineStyle, color);
+                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(h, [offset(ii, 1), h-offset(ii, 2)-hp+1], [offset(ii, 1)+wp-1, h-offset(ii, 2)], lineStyle, color);
             case 4,% The right-down
-                ShowAddBox(point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox([w-offset(ii, 1)-wp+1, h-offset(ii, 2)-hp+1], [w-offset(ii, 1), h-offset(ii, 2)], lineStyle, color);
+                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(h, [w-offset(ii, 1)-wp+1, h-offset(ii, 2)-hp+1], [w-offset(ii, 1), h-offset(ii, 2)], lineStyle, color);
             otherwise,
                 error('There is only four cornor');
         end
