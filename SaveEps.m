@@ -10,11 +10,12 @@ function SaveEps(fHandle, fileName, bColor)
     if nargin == 2,
         bColor = 0;
     end
-    dir = '.\temp\';
-    if ~exist('dir', 'dir'),
-        mkdir(dir);
+    
+    dirPath = '.\temp\';
+    if ~exist(dirPath, 'dir'),
+        mkdir(dirPath);
     end
-    fileName = strcat(dir, fileName);
+    fileName = strcat(dirPath, fileName);
     
     if bColor,
         print(fHandle, '-depsc', fileName);
