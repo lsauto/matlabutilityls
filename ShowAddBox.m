@@ -33,6 +33,7 @@ function ShowAddBox(handle, point1, point2, lineStyle, color)
     pointY = pointY';
     for ii=1:np,
         plot(pointX(:, ii), pointY(:, ii), 'color', color(ii, :), 'lineStyle', lineStyle);
+        pause
     end
     hold off
 end
