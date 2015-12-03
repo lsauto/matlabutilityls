@@ -42,8 +42,8 @@ function ShowEnlargePatch(imgRec, point1, point2, lr, offset, mag, lineStyle, co
     % ------------------------------------------
     
     % ----------------- Generate the image ---------------
-    w = size(imgRec, 2);
-    h = size(imgRec, 1);
+    W = size(imgRec, 2);
+    H = size(imgRec, 1);
     for ii =1:size(point1, 1),
         ww = point2(ii, 1)-point1(ii, 1)+1;
         hh = point2(ii, 2)-point1(ii, 2)+1;
@@ -55,18 +55,18 @@ function ShowEnlargePatch(imgRec, point1, point2, lr, offset, mag, lineStyle, co
             case 1,% The left-upper
                 imgRec(offset(ii, 2):offset(ii, 2)+size(patch,1)-1, offset(ii, 1):offset(ii, 1)+size(patch,2)-1, :) = patch;
             case 2,% The right-upper
-                imgRec(offset(ii, 2):offset(ii, 2)+hp-1, w-offset(ii, 1)-wp+1:w-offset(ii, 1), :) = patch;
+                imgRec(offset(ii, 2):offset(ii, 2)+hp-1, W-offset(ii, 1)-wp+1:W-offset(ii, 1), :) = patch;
             case 3,% The left-down
-                imgRec(h-offset(ii, 2)-hp+1:h-offset(ii, 2), offset(ii, 1):offset(ii, 1)+wp-1, :) = patch;
+                imgRec(H-offset(ii, 2)-hp+1:H-offset(ii, 2), offset(ii, 1):offset(ii, 1)+wp-1, :) = patch;
             case 4,% The right-down
-                imgRec(h-offset(ii, 2)-hp+1:h-offset(ii, 2), w-offset(ii, 1)-wp+1:w-offset(ii, 1), :) = patch;
+                imgRec(H-offset(ii, 2)-hp+1:H-offset(ii, 2), W-offset(ii, 1)-wp+1:W-offset(ii, 1), :) = patch;
             otherwise,
                 error('There is only four cornor');
         end
     end
      
     % ---------------- Show ------------------
-    h = ShowImageGrad(imgRec);
+    gf = ShowImageGrad(imgRec);
     for ii =1:size(point1, 1),
         ww = point2(ii, 1)-point1(ii, 1)+1;
         hh = point2(ii, 2)-point1(ii, 2)+1;
@@ -76,17 +76,17 @@ function ShowEnlargePatch(imgRec, point1, point2, lr, offset, mag, lineStyle, co
 
         switch lr(ii),
             case 1,% The left-upper
-                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox(h, offset(ii, :), offset(ii, :)+[size(patch,2), size(patch,1)], lineStyle, color);
+                ShowAddBox(gf, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(gf, offset(ii, :), offset(ii, :)+[size(patch,2), size(patch,1)], lineStyle, color);
             case 2,% The right-upper
-                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox(h, [w-offset(ii, 1)-wp+1, offset(ii, 2)], [w-offset(ii, 1), offset(ii, 2)+hp-1], lineStyle, color);
+                ShowAddBox(gf, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(gf, [W-offset(ii, 1)-wp+1, offset(ii, 2)], [W-offset(ii, 1), offset(ii, 2)+hp-1], lineStyle, color);
             case 3,% The left-down
-                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox(h, [offset(ii, 1), h-offset(ii, 2)-hp+1], [offset(ii, 1)+wp-1, h-offset(ii, 2)], lineStyle, color);
+                ShowAddBox(gf, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(gf, [offset(ii, 1), H-offset(ii, 2)-hp+1], [offset(ii, 1)+wp-1, H-offset(ii, 2)], lineStyle, color);
             case 4,% The right-down
-                ShowAddBox(h, point1(ii, :), point2(ii, :), lineStyle, color);
-                ShowAddBox(h, [w-offset(ii, 1)-wp+1, h-offset(ii, 2)-hp+1], [w-offset(ii, 1), h-offset(ii, 2)], lineStyle, color);
+                ShowAddBox(gf, point1(ii, :), point2(ii, :), lineStyle, color);
+                ShowAddBox(gf, [W-offset(ii, 1)-wp+1, H-offset(ii, 2)-hp+1], [W-offset(ii, 1), H-offset(ii, 2)], lineStyle, color);
             otherwise,
                 error('There is only four cornor');
         end
