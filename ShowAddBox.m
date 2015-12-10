@@ -17,8 +17,8 @@ function ShowAddBox(handle, point1, point2, lineStyle, color)
         lineStyle = '-';
     end
     if nargin <5,
-%         color = repmat([255 0 0], np, 1);
-        color = colormap(jet(np));
+        color = repmat([1 0 0], np, 1);
+%         color = colormap(jet(np));
     end  
     % ------------------------------------
     if all(prod(point1-point2, 2)<0),
@@ -33,7 +33,7 @@ function ShowAddBox(handle, point1, point2, lineStyle, color)
     pointY = pointY';
     for ii=1:np,
         plot(pointX(:, ii), pointY(:, ii), 'color', color(ii, :), 'lineStyle', lineStyle);
-        pause
+%         pause
     end
     hold off
 end
