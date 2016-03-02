@@ -8,7 +8,14 @@
 % [c11, c12    [dxx, dxy
 %  c21, c22] =  dyx, dyy]
 % B = -(c11+c22), C = c11*c22-c12*c21
-function [postMap, ss] = EigDecBlock(img, sigma)
+function [postMap, ss] = EigDecBlock(grad, sigma)
+    
+    % ----- Judge the parameter -------
+    if isreal(grad),
+        error('The gradient should be complex number');
+    end
+    
+    % ---------------------------------
 
     winSize = ceil(sigma*6);
     if ~mod(winSize, 2),
@@ -16,16 +23,16 @@ function [postMap, ss] = EigDecBlock(img, sigma)
     end
     
     h = fspecial('gauss', [winSize winSize], sigma);
-    [hh, ww] = size(img); 
+    [hh, ww] = size(grad); 
     ss = zeros(2, hh, ww);
 
-    dx = real(img);
-    dy = imag(img);
+    dx = real(grad);
+    dy = imag(grad);
     dxx = imfilter(dx.*dx, h, 'symmetric');
     dxy = imfilter(dx.*dy, h, 'symmetric');
     dyy = imfilter(dy.*dy, h, 'symmetric');
     
-    A = ones(size(img));
+    A = ones(size(grad));
     B = -(dxx+dyy);
     C = dxx.*dyy - dxy.*dxy;
     
